@@ -6,7 +6,7 @@ const router = require('./router');
 
 const app = express();
 app.use(cors({
-    origin: 'https://realtime-chat-frontend-react-ore3dtp6p-anik-roy.vercel.app/',
+    origin: true,
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }));
 app.use(router);

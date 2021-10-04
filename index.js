@@ -1,11 +1,16 @@
+var cors = require('cors');
 const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
-var cors = require('cors')
 const router = require('./router');
 
 const app = express();
+
 app.use(cors({
+    origin: true,
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}));
+app.options('*', cors({
     origin: true,
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }));

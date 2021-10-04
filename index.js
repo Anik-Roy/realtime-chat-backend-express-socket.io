@@ -1,32 +1,21 @@
 const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
-const cors = require('cors');
+var cors = require('cors')
+const router = require('./router');
+
 const app = express();
-app.use(
-    cors({
-        origin: true,
-        optionsSuccessStatus: 200,
-        credentials: true,
-    })
-);
-app.options(
-    '*',
-    cors({
-        origin: true,
-        optionsSuccessStatus: 200,
-        credentials: true,
-    })
-);
+app.use(cors({
+    origin: 'https://realtime-chat-frontend-react-ore3dtp6p-anik-roy.vercel.app/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}));
+app.use(router);
 
 const server = http.createServer(app);
 const io = socketio(server);
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
 const PORT = process.env.PORT || 5000;
-const router = require('./router');
-
-app.use(router);
 
 io.on('connection', (socket) => {
     console.log('a user connected!');

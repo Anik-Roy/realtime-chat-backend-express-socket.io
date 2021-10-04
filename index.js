@@ -6,14 +6,11 @@ const router = require('./router');
 
 const app = express();
 
-app.use(cors({
-    origin: true,
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}));
-app.options('*', cors({
-    origin: true,
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}));
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+}
+app.use(cors(corsOptions));
 app.use(router);
 
 const server = http.createServer(app);

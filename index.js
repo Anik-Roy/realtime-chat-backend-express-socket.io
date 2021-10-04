@@ -14,7 +14,13 @@ app.use(cors(corsOptions));
 app.use(router);
 
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio(server, {
+    cors: {
+        origin: '*',
+        methods: ["GET", "POST"],
+        credentials: true
+    }
+});
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
 const PORT = process.env.PORT || 5000;

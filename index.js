@@ -3,7 +3,13 @@ const socketio = require('socket.io');
 const http = require('http');
 const cors = require('cors');
 const app = express();
-app.use(cors());
+app.use(
+    cors({
+        origin: true,
+        optionsSuccessStatus: 200,
+        credentials: true,
+    })
+);
 app.options(
     '*',
     cors({
